@@ -20,8 +20,6 @@ export default function BookmarkManager({ user }: { user: User }) {
     const [loading, setLoading] = useState(true)
     const [adding, setAdding] = useState(false)
     const [error, setError] = useState('')
-    const [lastEvent, setLastEvent] = useState<string>('None')
-    const [realtimeStatus, setRealtimeStatus] = useState<string>('Connecting...')
 
     // Stable client reference — never recreated on re-render
     const supabaseRef = useRef(createClient())
@@ -47,7 +45,7 @@ export default function BookmarkManager({ user }: { user: User }) {
                 { event: '*', schema: 'public', table: 'bookmarks' },
                 (payload) => {
                     console.log('[Realtime] DB event:', payload)
-                    setLastEvent(`DB: ${payload.eventType} at ${new Date().toLocaleTimeString()}`)
+
                     fetchBookmarks()
                 }
             )
@@ -56,14 +54,11 @@ export default function BookmarkManager({ user }: { user: User }) {
                 { event: 'bookmark-update' },
                 (payload) => {
                     console.log('[Realtime] Broadcast event:', payload)
-                    setLastEvent(`Broadcast: ${payload.type} at ${new Date().toLocaleTimeString()}`)
+
                     fetchBookmarks()
                 }
             )
-            .subscribe((status) => {
-                console.log('[Realtime] status:', status)
-                setRealtimeStatus(status)
-            })
+            .subscribe((status) => { console.log('[Realtime] status:', status) })
 
         return () => { supabase.removeChannel(channel) }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -147,17 +142,7 @@ export default function BookmarkManager({ user }: { user: User }) {
                     <div>
                         <h1 className="text-xl font-bold text-white leading-tight">Smart Bookmarks</h1>
                         <p className="text-slate-500 text-xs">{user.email}</p>
-                        <p className="text-xs text-slate-600 mt-1 flex items-center gap-2">
-                            <span>Status: <span className={realtimeStatus === 'SUBSCRIBED' ? 'text-green-400' : 'text-yellow-400'}>{realtimeStatus}</span></span>
-                            <span>•</span>
-                            <span>Last Event: <span className="text-purple-400">{lastEvent}</span></span>
-                            <button
-                                onClick={() => fetchBookmarks()}
-                                className="ml-2 px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-[10px] text-slate-400 transition-colors"
-                            >
-                                Refresh
-                            </button>
-                        </p>
+
                     </div>
                 </div>
                 <button
