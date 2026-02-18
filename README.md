@@ -91,6 +91,12 @@ Google returned a 400 error during sign-in.
 **The Solution:**
 Registered the **Supabase Callback URL** (`https://<project-ref>.supabase.co/auth/v1/callback`) in Google Cloud Console, *not* the localhost URL.
 
+### Challenge 4: OAuth redirect URL misconfiguration
+**The Issue:**
+I was redirecting it to localhost.
+**The Solution:**
+Registered the **site URL** with vercel url in supabase url configuration.
+
 
 ---
 
