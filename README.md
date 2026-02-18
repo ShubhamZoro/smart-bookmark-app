@@ -78,7 +78,6 @@ Supabase Realtime status showed `SUBSCRIBED`, but events weren't triggering upda
 **The Solution (Multi-Layer Strategy):**
 1. **Broadcast Channel (Primary Fallback):** Implemented a client-side "shout" mechanism. When a user adds/deletes a bookmark, the client sends a `broadcast` event to other tabs. This bypasses the database log entirely and is instant.
 2. **Database Realtime (Secondary):** Kept the Postgres change listener as a backupsource of truth.
-3. **Manual Refresh:** Added a debug-friendly "Status" indicator and a manual "Refresh" button in the UI header.
 
 ### Challenge 2: Instant Feedback (Optimistic UI)
 **The Issue:**
@@ -92,11 +91,6 @@ Google returned a 400 error during sign-in.
 **The Solution:**
 Registered the **Supabase Callback URL** (`https://<project-ref>.supabase.co/auth/v1/callback`) in Google Cloud Console, *not* the localhost URL.
 
-### Challenge 4: NPM Naming Restriction
-**The Issue:**
-`create-next-app` rejected "Abstrabit" due to uppercase letters.
-**The Solution:**
-Created the project in a subdirectory named `smart-bookmark-app`.
 
 ---
 
