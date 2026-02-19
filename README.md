@@ -2,6 +2,10 @@
 
 A full-stack bookmark manager with **Google OAuth**, **real-time sync**, and a premium dark UI — built with Next.js 14, Supabase, and Tailwind CSS.
 
+# URL
+
+https://smart-bookmark-app-iota-liard.vercel.app/
+
 ## Features
 
 - 🔐 **Google OAuth** — one-click sign-in via Supabase Auth
