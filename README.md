@@ -5,6 +5,9 @@ A full-stack bookmark manager with **Google OAuth**, **real-time sync**, and a p
 # URL 
 https://smart-bookmark-app-iota-liard.vercel.app/
 
+# Video URL
+https://drive.google.com/file/d/1_5_rWR7JqMsLInoSzXCkt0H9Y4yBvoMc/view?usp=drive_link
+
 ## Features
 
 - 🔐 **Google OAuth** — one-click sign-in via Supabase Auth
