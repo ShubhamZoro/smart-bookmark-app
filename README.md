@@ -2,8 +2,7 @@
 
 A full-stack bookmark manager with **Google OAuth**, **real-time sync**, and a premium dark UI — built with Next.js 14, Supabase, and Tailwind CSS.
 
-# URL
-
+# URL 
 https://smart-bookmark-app-iota-liard.vercel.app/
 
 ## Features
@@ -95,11 +94,17 @@ Google returned a 400 error during sign-in.
 **The Solution:**
 Registered the **Supabase Callback URL** (`https://<project-ref>.supabase.co/auth/v1/callback`) in Google Cloud Console, *not* the localhost URL.
 
-### Challenge 4: OAuth redirect URL misconfiguration
+### Challenge 4: Google OAuth `javascript_url`
 **The Issue:**
-I was redirecting it to localhost.
+Error during sign-in.
 **The Solution:**
-Registered the **site URL** with vercel url in supabase url configuration.
+Registered the **javascript_url** in Google Cloud Console the frontend url.
+
+### Challenge 5: OAuth redirect URL misconfiguration for deployed app
+**The Issue:**
+I was redirecting it to localhost and getting middleware error.
+**The Solution:**
+Registered the **site URL** in Authenication tab with frontend(vercel) url in supabase url configuration.
 
 
 ---
